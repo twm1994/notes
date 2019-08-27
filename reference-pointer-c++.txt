@@ -1,0 +1,100 @@
+//pointer reference
+int i = 3;
+// A pointer to variable i (or stores
+// address of i)
+int *ptr = &i;
+// A reference (or alias) for i.
+int &ref = i;
+
+//pass by reference: modify local variables of the caller function
+void fun(int &x) {
+  x = 20;
+}
+int main() {
+  int x = 10;
+  fun(x);
+  cout<<"New value of x is "<<x;
+  return 0;
+}
+
+//pass by reference: pass large size arguments
+class Employee {
+private:
+  string name;
+  string desig;
+  // More attributes and operations
+};
+void printEmpDetails(const Employee &emp) {
+  cout<<emp.getName();
+  cout<<emp.getDesig();
+  // Print more attributes
+}
+
+
+//pass by reference: avoid object slicing
+#include <iostream>
+#include<string>
+using namespace std;
+class Pet {
+public:
+  virtual string getDescription() const {
+    return "This is Pet class";
+  }
+};
+class Dog : public Pet {
+public:
+  virtual string getDescription() const {
+    return "This is Dog class";
+  }
+};
+void describe(Pet p) { // Slices the derived class object
+  cout<<p.getDescription()<<endl;
+}
+void describe(const Pet &p) { // Doesn't slice the derived class object.
+  cout<<p.getDescription()<<endl;
+}
+int main() {
+  Dog d;
+  describe(d);
+  return 0;
+}
+
+//pass by reference: achieve run time polymorphism in a function
+#include<iostream>
+using namespace std;
+class base {
+public:
+  virtual void show() { // Note the virtual keyword here
+    cout<<"In base \n";
+  }
+};
+
+class derived: public base {
+public:
+  void show() {
+    cout<<"In derived \n";
+  }
+};
+// Since we pass b as reference, we achieve run time polymorphism here.
+void print(base &b) {
+  b.show();
+}
+int main(void) {
+  base b;
+  derived d;
+  print(b);
+  print(d);
+  return 0;
+}
+
+// function to return a pointer
+int* returnPointerValue()
+{
+  return &global_var;
+}
+
+// function to return reference value
+int& ReturnReference()
+{
+  return global_var;
+}

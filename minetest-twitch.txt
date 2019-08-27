@@ -1,0 +1,22 @@
+jthread
+--------------------------------
+download jthread-1.3.3
+build with CMake
+open jthread.sln in build ouptput folder
+build/rebuild ALL_BUILD
+build/rebuild jthread-static
+
+minetest_nmpr
+--------------------------------
+copy jthread-1.3.3
+copy irrlicht-1.8.4
+open minetest.sln
+click OK when prompted to update project
+open Project->Property
+set Output Directory .\build-output
+set Windows SDK Version
+set Platform Toolset
+set Additional Include Directories C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include;D:\minetest_nmpr_test1\jthread-1.3.3\src;D:\minetest_nmpr_test1\irrlicht-1.8.4\include;D:\minetest_nmpr_WinSDK_10.0.17134.0_VSv141\jthread-1.3.3\build-output\src%(AdditionalIncludeDirectories)
+set Additional Library Directories C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\lib;D:\Downloads\Minetest\jthread-1.3.3\bin\src\Release;D:\minetest_nmpr_test1\irrlicht-1.8.4\lib\Win32-visualstudio;%(AdditionalLibraryDirectories)
+change line #pragma comment(lib, "WSock32.Lib") -> #pragma comment(lib, "Ws2_32.Lib") in socket.h
+copy Irrlicht.dll from D:\minetest_nmpr_test1\irrlicht-1.8.4\bin\Win32-VisualStudio to .\build-output

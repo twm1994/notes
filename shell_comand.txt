@@ -1,0 +1,53 @@
+// create file
+touch file_name
+touch prefix{name_list}.suffix
+touch prefix{start..end}.suffix
+mkdir -p father/son/grandson
+
+// copy file/dir
+cp file dir
+cp -r ori_dir des_dir
+
+// remove file/dir
+rm [-f] file
+rm -r dir
+mv file dir
+mv ori_name new_name
+
+// view file
+cat | sort
+tac
+nl -b [atn] -n [ln rn rz] -w
+more
+less
+head
+tail
+file
+
+ls
+man
+
+// user & group management
+su -l
+sudo adduser
+useradd
+sudo addgroup
+groupadd
+usermod -G
+sudo deluser  --remove-home
+sudo chown
+chmod [ugo][[+-][rw]]
+sudo useradd -m -d /home/user1 -G group1,group2 -s /bin/sh user1
+
+// variable
+declare VARNAME
+echo $VARNAME
+
+// add path
+$PATH=$PATH:PATHNAME
+
+// search
+where
+locate
+which
+find DIR -name DIRORFILE

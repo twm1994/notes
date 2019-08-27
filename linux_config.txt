@@ -1,0 +1,51 @@
+#----------Resize Window----------
+sudo vim /etc/default/grub
+# add following line
+GRUB_GFXPAYLOAD_LINUX=1024x768x16
+# :wq to save and quit
+sudo update-grub
+sudo shutdown -h now
+
+
+#----------List Packages----------
+apt list --installed|less
+
+
+#----------Conda----------
+curl -O https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+
+
+#----------Share a Folder----------
+# this example mounts the Ubuntu_Server folder from host to /home/twm/shared in guest
+# working directory is /home/twm
+sudo apt-get install virtualbox-guest-utils
+# folder name in Shared Folders option -> folder name in guest machine
+sudo mount -t vboxsf Ubuntu_Server shared
+# persistent mount
+sudo vim /etc/fstab
+# add following line (separated by tabs)
+Ubuntu_Server  /home/twm/shared vboxsf  defaults  0 0
+# :wq to save and quit
+sudo vim /etc/modules
+# add following line
+vboxsf
+# :wq to save and quit, then reboot
+
+# point apache's web directory to the shared folder
+sudo rm -rf /var/www/html
+sudo ln -s ~/shared /var/www/html
+
+#----------Miscellaneous----------
+# remove cloud-init
+echo 'datasource_list: [ None ]' | sudo -s tee /etc/cloud/cloud.cfg.d/90_dpkg.cfg
+sudo apt-get purge cloud-init
+sudo rm -rf /etc/cloud/; sudo rm -rf /var/lib/cloud/
+reboot
+
+# clean packages
+sudo apt-get autoremove
+
+#----------VirtualBox Guest Additions----------
+sudo apt install build-essential dkms linux-headers-$(uname -r)
+# cd to the mount point of VBoxGuestAdditions.iso
+sh ./VBoxLinuxAdditions.run
