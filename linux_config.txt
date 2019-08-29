@@ -41,11 +41,15 @@ echo 'datasource_list: [ None ]' | sudo -s tee /etc/cloud/cloud.cfg.d/90_dpkg.cf
 sudo apt-get purge cloud-init
 sudo rm -rf /etc/cloud/; sudo rm -rf /var/lib/cloud/
 reboot
+
 # search if there is an instance of apt command running
 ps aux | grep -i apt
 
 # clean packages
 sudo apt-get autoremove
+
+# in case locate does not work
+sudo updatedb
 
 #----------VirtualBox Guest Additions----------
 sudo apt install build-essential dkms linux-headers-$(uname -r)
