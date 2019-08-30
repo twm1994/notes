@@ -35,6 +35,7 @@ vboxsf
 sudo rm -rf /var/www/html
 sudo ln -s ~/shared /var/www/html
 
+
 #----------Miscellaneous----------
 # remove cloud-init
 echo 'datasource_list: [ None ]' | sudo -s tee /etc/cloud/cloud.cfg.d/90_dpkg.cfg
@@ -51,7 +52,18 @@ sudo apt-get autoremove
 # in case locate does not work
 sudo updatedb
 
+
 #----------VirtualBox Guest Additions----------
 sudo apt install build-essential dkms linux-headers-$(uname -r)
 # cd to the mount point of VBoxGuestAdditions.iso
 sh ./VBoxLinuxAdditions.run
+
+
+#----------Install TexLive----------
+sudo vi /etc/bash.bashrc
+# add at the end of the file
+PATH=/usr/local/texlive/bin/x86_64-linux:$PATH; export PATH
+MANPATH=/usr/local/texlive/texmf-dist/doc/man:$MANPATH; export MANPATH
+INFOPATH=/usr/local/texlive/texmf-dist/doc/info:$INFOPATH; export INFOPATH
+# save
+source ~/.bashrc
