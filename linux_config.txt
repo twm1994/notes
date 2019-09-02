@@ -52,6 +52,9 @@ sudo apt-get autoremove
 # in case locate does not work
 sudo updatedb
 
+# for grub config
+sudo add-apt-repository ppa:danielrichter2007/grub-customizer
+
 
 #----------VirtualBox Guest Additions----------
 sudo apt install build-essential dkms linux-headers-$(uname -r)
