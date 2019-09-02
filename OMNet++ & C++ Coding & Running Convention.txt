@@ -1,0 +1,290 @@
+1. It's better not to include other module classes in a module class.
+
+2. A module cannot be observed before its WATCH-ed variables have been initialized. Otherwise, it will cause program stuck.
+
+3. A call of getDisplayString on an unconnected cGate will automatically create a cIdealChannel bound to the gate to hold the display string. So, after calling getDisplayString, the gate cannot install another channel before uninstalling the existing channel.
+
+4. GatebasedModule::initialized must be initialized first in the initialize function of a subclass.
+
+5. Before calling gateHalf()->getId, whether the gate is still valid needs to be checked (through the hasGate function).
+
+6. Do not observe (i.e., check the state of) a module before it is initialized. Otherwise, it will cause a system error.
+
+7. map query before set content will cause program crash error.
+
+8. A self-message cannot be delete in handleMessage if it is to be deleted in destructor. Otherwise a pointer double-delete error will occur.
+
+9. Double-delete a pointer will cause system crash.
+
+10. map m[key] may create a new entry in m even if key does not exist previously in m.
+
+11. Inappropriately assign a variable to WATCH / WATCH_MAP / WATCH_VECTOR ... may cause compilation failure.
+
+12. cStringTokenizer does not split an empty string which follows a delimiter from tokenizer.nextToken()
+
+13. cancelAndDelete will delete the referenced content of a pointer. Thus avoid to call delete before calling cancelAndDelete to delete a pointer more than once.
+13.1 Also, cancelAndDelete  cannot be continuously called on the same cMessage, which will cause error.
+
+14. Boost can be used to complement c++98, but boost::foreach may generate a parsing error (In eclipes Indigo version). Just ignore the error.
+
+15. In C++, pointers are not initialized with NULL by default. Thus, it is a good practice to NULLify all pointers.
+
+Motivation: since cleanup-time garbage collection is off by default in OMNeT++ 3.2, users are encouraged to write proper destructors. However, destructors can only be written if constructors set pointer members of the class to NULL. (This is currently customarily done in the initialize() method; however, pointers must be initialized to NULL even if initialize() doesn't get called due to a runtime error earlier in another module's initialize(), otherwise the destructor will crash.) 
+
+16. Debug mode do not automatically re-build project.
+
+17. genertic type mismatch will throw compilation error which is not marked in source code.
+
+18. Modifying the content of a container prefers to use Reference. In C++, reference must be explicitly declared before use.
+
+19. Standard simulation import files: refer to "Path and Symbols.png"
+
+20. Socket close() for *nix and socketclose() for windows must be distinguished in use.
+
+21. Do NOT print output stream in a multi-stage initialization, which will cause error.
+
+22. Try not manually creating a module with multi-stage initialization at the simulation initialization stage. Otherwise, pay attention that a simulation will redundantly invoke callInitialize at the simulation initialization stage.
+
+23. cMessage.dup do not duplicate control info object (i.e., the ctrlp member)
+
+24. "interface" is a reserved word either in c++ or in OMNeT++
+
+25. Compilation error not able to be cleared after re-builds: check whether indexer setting is correct: gcc-debug / gcc-release
+
+26. In OMNet++ 5.0, to include OMNet++ system libraries, such as cstringtokenizer.h, the path "<omnetpp>/include/omnetpp" must be included in the project Include path
+
+27. For code migration from OMNeT++v4 to OMNeT++v5, the following changes are required:
+
+	1) using namespace omnetpp;
+
+	2) using namespace boost;
+
+	3) using namespace boost::tuples;
+
+	4) tuple -> boost::tuple
+
+	5) simulation object -> getSimulation() pointer
+
+	6) ev object -> getEnvir() pointer
+
+	7) ev.getConfig() -> getEnvir()->getConfig()
+
+	8) oppo_error(...) -> throws cRuntimeError(...)
+
+	9) If socket is used, makefrag file should be included in the src for platform-dependent socket configuration
+
+	10) for message compilation involving external types (e.g., another classs), message compiler verison must be change to "--msg-4" as follows:
+	Project properties -> OMNeT++ -> Makemake -> select the "src" folder -> option -> "Custom" panel -> change "MSGC:=$(MSGC) --msg6" to "MSGC:=$(MSGC) --msg4"
+
+	11) par("x").setStringValue() to assign the return value to a string type
+
+	12) To avoid re-build everything after only changing a single file, change the following configuration:
+	Project properties -> OMNeT++ -> Makemake -> select the "src" folder -> option -> "Scope" panel -> de-select the "Recursive make" option
+	
+
+
+28. Third-party library cannot have empty space in the path variable, e.g., "JSON for Model C++" is not allowed. It can be "JOSN_for_Model_C++"
+
+29. In C++, when using templates, the definition of a function template cannot be separated from the header file to the .cpp file . It needs to be put into the definition in the header file.
+
+30. In C++, to avoid creating wrong element in a map type, it is better to use map::fine(value)->second instead of the map::[] operator.
+
+31. In C++, the source of "Unknown type name xxx" error could be: 
+	1) **Circular Including
+	
+	2) the source directory contain different type of source files, e.g., .c and .cpp
+	
+	3) the actual code was in a static lib which was not linked properly
+
+32. If the "JSON for Modern C++" library is applied, then pay attention to the following issues:
+	1) the type json::[] or json::dump() return a json type, not a string type.
+	
+	2) T t = j[ptr] will implicitly convert the json type to the type T.
+	
+	3) For explicit value reading, use json::get<type>(), e.g., json::get<std::string>().
+	
+33. In OMNeT++, the watched values can be modified, by clicking Enter for confirmation
+
+34. In C++, the naming of a function could be confused by the naming of a variable. If a variable is declared before the invocation of a function with the same name, the compiler will report an error. For example, 
+
+	string survivedMember = survivedMembers();
+
+or even
+
+	int order(2, 3){return 1;}
+	main(){
+		char order;
+		cout << order(2, 3);}
+	
+will cause a compilation error. Either change distinguish the two names or explicit assigned the function caller to "this->" for an object-level call, "::" for a global function, or "<class>::" for a static function
+
+35. In C++, properly use goto to break a nested loop
+
+36. For statistic recording, 
+	1) the "record" type(s) in the @statistic label must match or consistent with the result-recording-modes parameter. For example, 
+	
+	"record = stats" will not be recorded with "result-recording-modes parameter = all"
+	
+	2) In OMNet++, click "show output vector view" in the vector panel to show all vector samples
+	
+37. CMake command (on the project folder with CMakeLists.txt) for Makefile generation:
+
+cmake -G "MinGW Makefiles"
+
+38. Make in windows with MinGW (on the project folder with Makefile) for C/C++ code compilation:
+
+mingw32-make
+
+39. Windows socket in GCC/G++:
+	1) pre-compilation:
+	
+#ifdef _WIN32
+    #ifndef _WIN32_WINNT
+        #define _WIN32_WINNT 0x0501
+    #endif
+	#define WIN32_LEAN_AND_MEAN
+	#include <windows.h>
+	#include <ws2tcpip.h>
+typedef SOCKET socket_t;
+typedef int socklen_t;
+#else
+	... (unix/linux socket)
+#endif
+
+	2) _WIN32 needs to be checked in the compile's (e.g., MinGW G++) pre-defined macro.
+		
+	3) If getaddrinfo(), getnameinfo(), or freeaddrinfo() is invoked, the macro _WIN32_WINNT is needed and must be no less than 0x0501
+		
+	4) If ws2tcpip.h is called, Ws2_32.Lib (e.g., path: C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Lib\x64) must be linked as in the G++ Libraries. Otherwise, "undefined reference to getaddrinfo" error will be thrown.
+	
+	>> main.cpp:(.text+0x18b): undefined reference to `getaddrinfo@16'
+	>> collect2: ld returned 1 exit status	
+		
+	5) Else, wsock32.dll can be added into the G++ libraries. But wsock32.dll and Ws2_32.Lib cannot be simultaneously included in the G++ Libraries. Otherwise, "multiple defined xxx" error will be thrown.
+	
+40. Irrlicht does not provide a library for win-GCC. It must be built from the source code:
+	1) Download Code::Blocks and install it as well (Download the version without the compiler).
+	
+	2) Open the Irrlicht-gcc.cbp in the <Irrlicht_home>/source/Irrlicht/ folder in Code::Blocks
+	
+	3) Build the GCC library and .dll files for Irrlicht
+	
+	4) Include Irrlicht (which will point to the gcc library file "libIrrlicht.a") in the G++ Libraries and <Irrlicht_home>/irrlicht-1.8.4/lib/Win32-gcc/ in the G++ Libraries path.
+	
+	5) Include <Irrlicht_home>/irrlicht-1.8.4/include/ in the project Include path
+	
+	6) Copy Irrlicht.dll from <Irrlicht_home>/irrlicht-1.8.4/bin/Win32-gcc/ to the same folder of the generated .exe file.
+	
+41. If jThread is needed in C++, the libraries and header files need to be included: 
+	1) jThread needs to be built first with CMake and Make (e.g., mingw32-make)
+	
+	2) Include <jThread_home>/src/ in the project Include path
+	
+	3) Add libjthread in the G++ Libraries and <jThread_home>/src/ in the G++ Libraries path.
+	
+	4) Copy libjthread.dll from <jThread_home>/src/ to the same folder of the generated .exe file.
+	
+Note that, in the CMake-CUI, the source code path should be configured to the jThread project root path, and the binaries path is the output folder
+	
+42. If windows API (e.g., windows.h) is needed, gdi32.dll (for GUI, e.g., path: C:\Windows\System32) needs to be added into the G++ Libraries path.
+
+If you are redistributing GDI+ to a down-level platform or a platform that does not ship with that version of GDI+ natively, install Gdiplus.dll in your application directory. This puts it in your address space, but you should use the linker's /BASE option to rebase the Gdiplus.dll to prevent address space conflict. (https://docs.microsoft.com/en-us/windows/desktop/gdiplus/-gdiplus-gdi-start)
+
+43. A .dll file can be linked to the generated executable file by copying it to the same folder as the .exe file
+
+44. If s{w,n}printf functions are invoked and the compiler is MinGW G++, 
+
+	1) The following pre-processor needs to the included in the header to redirect the s{w,n}printf functions to the _sn{w}printf function
+
+	//! Defines for s{w,n}printf because these methods do not match the ISO C
+	//! standard on Windows platforms, but it does on all others.
+	//! These should be int snprintf(char *str, size_t size, const char *format, ...);
+	//! and int swprintf(wchar_t *wcs, size_t maxlen, const wchar_t *format, ...);
+	#if defined(_MSC_VER) && _MSC_VER > 1310 && !defined (_WIN32_WCE)
+	#define swprintf swprintf_s
+	#define snprintf sprintf_s
+	#elif !defined(__CYGWIN__)
+	#define swprintf _snwprintf
+	#define snprintf _snprintf
+	#endif
+	
+	2) Add #include <stdio.h> and #include <wchar.h> in the header to include the _sn{w,n}printf function declaration.
+	
+45. "#pragma once": a convenient way to in a header file to indicates that the file is only to be parsed once, a replacement of the header guards.
+
+46. Difference of struct and class in C++: the default accessibility is public for struct while private for class.
+
+47. Class desctrutor not well-defined could cause "c++ undefined reference to `vtable for xxx" error at class constructor.
+
+48. PATH in the Environment for OMNeT++-v5 build: 
+
+C:\Workspaces\OMNeT++\omnetpp-5.4\bin;C:\Workspaces\OMNeT++\omnetpp-5.4\tools\win64\mingw64\bin;C:\Workspaces\OMNeT++\omnetpp-5.4\tools\win64\usr\bin;C:/Workspaces/OMNeT++/omnetpp-5.4/ide/jre/bin/server;C:/Workspaces/OMNeT++/omnetpp-5.4/ide/jre/bin;C:/Workspaces/OMNeT++/omnetpp-5.4/ide/jre/lib/amd64;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Python27\;C:\Python27\Scripts;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;
+
+49. To link to an external shared library, e.g., a .a, .dll, or .lib file, it is better to build the file with the Make Compiler within the OMNeT++ bundle. Otherwise, the build process may throw incompatibility error.
+
+50. Force OMNeT++/Eclispe CDT to use English as build output language: add new environment variable:
+Variable: LC_ALL 
+Value: en_US.UTF-8
+
+51. For integrating jThread into OMNeT++ compilation, it is better to directly include the generated source codes (after changing the suffix from .cpp to .cc) to the OMNeT++ source folder. If jThread is integrated through (static or dynamic) library linking, project build in debug mode may fail.
+
+52. Sort vector using std::sort(startIterator, endIterator, functor):
+
+1) functor is a normal or static function, it cannot be a member function
+2) If object state (i.e., object member variable) is needed in the comparison function, then it is better to use a functor structure instead of a function:
+
+An example:
+
+class MyClass{
+
+   // ...
+   struct doCompare{ 
+       doCompare(MyClass& info): m_info(info){;} // only if you really need the object state
+       const MyClass& m_info;
+       bool operator()(const int & i1, const int & i2)
+       { 
+            // comparison code using m_info
+       }
+   };
+
+   doSort() 
+   { std::sort( arr, arr+someSize, doCompare(*this) ); }
+};
+
+53. Except for char, using any integer type without signed is equivalent to using it with signed, i.e. signed int and int are equivalent. 
+
+54. In C++, declare utility classes in the class definition file (i.e., .cc or .cpp files) instead of header files (i.e., .h files) to avoid circular reference errors. If circular reference occurs in declaration, use forward declaration (which is an incomplete declaration).
+
+To forward-declare a class (e.g., A) with a namespace (e.g., namespace s1), 
+
+in ../b.h: 
+
+namespace ns1{
+    class A;
+}
+
+Class B {
+	A* a;
+}
+
+in ../b.cpp: 
+
+include "A.h"
+
+B::B(){
+	a = new A();
+}
+
+55. In CDT, C++ application running with the IDE runner is by default from  the project dir as the running context (i.e., working directory). To change the working directory, change the setting as follows:
+
+Open Run Configuration -> select the launch configuration -> at the right section, switch to the Argument pane -> select "Use default" check box and modify the Working directory by selecting the correct directory from "Workspace..."
+
+56. C++ copy/move constructor condition: 
+1) default constructor is defined
+2) no member that is non-static const or non-copyable
+
+57. sizeof a stack array (e.g., unsigned char a[]) can return a correct length of the array, while sizeof a heap array (e.g., unsigned char*) cannot. For string-type heap array, it can use strlen(const char*) to determine the length.
+
+56. In CDT/C++, a variable without initial value could have a correct default value (e.g., 0 for int and NULL for pointer) in the release mode, whereas it could have a WRONG initial value in the debug mode.
+
+57. In the range-based FOR loop, the auto type represents the constant elements of the iterated container, which mean auto type instances cannot modify the container elements
