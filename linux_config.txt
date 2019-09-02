@@ -55,6 +55,13 @@ sudo updatedb
 # for grub config
 sudo add-apt-repository ppa:danielrichter2007/grub-customizer
 
+# thermal control
+sudo add-apt-repository ppa:linrunner/tlp
+sudo apt-get update
+sudo apt-get install tlp tlp-rdw
+sudo tlp start
+sudo apt-get install indicator-cpufreq
+
 
 #----------VirtualBox Guest Additions----------
 sudo apt install build-essential dkms linux-headers-$(uname -r)
