@@ -1,0 +1,28 @@
+# initialize mysql
+# first cd to basedir
+bin\mysqld --initialize
+
+# start and stop the server
+"full\path\to\basedir\bin\mysqld" --console
+NET START MySQL
+NET STOP MySQL
+mysqladmin shutdown
+
+# connect to the server
+# cd to basedir
+bin\mysql -u root -p
+
+# assign new password
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'new_password';
+
+# connect to specific database when starting a mysql session
+mysql -u root -p dbname
+
+# version verification
+bin\mysqladmin -u root -p version
+
+# shutdown verification
+bin\mysqladmin -u root -p shutdown
+
+# jdbc connection parameters
+jdbc:mysql://localhost/dbname?useLegacyDatetimeCode=false&serverTimezone=Asia/Hong_Kong
