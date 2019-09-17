@@ -1,0 +1,95 @@
+# struct usage
+
+struct [structure tag] {
+   member definition;
+   member definition;
+   ...
+   member definition;
+} [one or more structure variables];
+
+struct Books {
+   char  title[50];
+   char  author[50];
+   char  subject[100];
+   int   book_id;
+} book;
+struct Books Book1;
+struct Books Book2;
+
+typedef struct {
+   char  title[50];
+   char  author[50];
+   char  subject[100];
+   int   book_id;
+} Books;
+Books Book1, Book2;
+
+struct Books *struct_pointer;
+struct_pointer = &Book1;
+struct_pointer->title;
+
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+# class & object
+
+class Box {
+   public:
+      double length;   // Length of a box
+      double breadth;  // Breadth of a box
+      double height;   // Height of a box
+      double getVolume(void);
+};
+Box Box1;          // Declare Box1 of type Box
+Box Box2;          // Declare Box2 of type Box
+
+double Box::getVolume(void) {
+   return length * breadth * height;
+}          // define member function outside the class
+
+class SmallBox:Box { // SmallBox is the derived class.
+   public:
+      void setSmallWidth( double wid );
+      double getSmallWidth( void );
+};
+
+C::C( double a, double b, double c): X(a), Y(b), Z(c) {
+   // initialize multiple fields X, Y, Z
+   ....
+}
+
+class derived-class: access-specifier base-class
+
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+// pointer
+type *var-name;
+
+int  var = 20;   // actual variable declaration.
+int  *ip;        // pointer variable
+ip = &var;       // store address of var in pointer variable
+
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+//reference
+// declare simple variables
+int    i;
+double d;
+
+// declare reference variables
+int&    r = i;
+double& s = d;
+
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+// template
+
+template <class type> ret-type func-name(parameter list) {
+   // body of function
+}
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+void somefunction(const int &value)
+{
+    int x = value; // Valid
+    value = 0; // Invalid
+}
