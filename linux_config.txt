@@ -43,6 +43,9 @@ sudo apt-get purge cloud-init
 sudo rm -rf /etc/cloud/; sudo rm -rf /var/lib/cloud/
 reboot
 
+# clean command history
+rm ~/.bash_history && history -c
+
 # search if there is an instance of apt command running
 ps aux | grep -i apt
 
