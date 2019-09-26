@@ -1,0 +1,2 @@
+# find and replace recursively
+find dir -name '*.surfix' -type f -exec sed -i -e 's/regex/replacement/g' -- {} +
