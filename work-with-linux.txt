@@ -1,6 +1,9 @@
 # find and replace recursively
 find dir -name '*.surfix' -type f -exec sed -i -e 's/regex/replacement/g' -- {} +
 
+# find and delete file with givn pattern
+find . -type f -name 'pattern' -delete
+
 # application folder
 # https://wiki.gnome.org/HowDoI/AppFolders
 gsettings get org.gnome.desktop.app-folders folder-children
