@@ -70,6 +70,9 @@ sudo apt install lm-sensors hddtemp
 sudo sensors-detect
 sudo apt install psensor
 
+# change console setup
+vim /etc/default/console-setup
+
 # fast update
 sudo sed -i -e 's/http:\/\/us.archive/mirror:\/\/mirrors/' -e 's/\/ubuntu\//\/mirrors.txt/' /etc/apt/sources.list
 
