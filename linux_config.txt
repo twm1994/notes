@@ -37,6 +37,10 @@ sudo ln -s ~/shared /var/www/html
 
 
 #----------Miscellaneous----------
+# edit open with application
+sudo vim ~/.config/mimeapps.list
+sudo vim ~/.local/share/applications/mimeapps.list
+
 # remove cloud-init
 echo 'datasource_list: [ None ]' | sudo -s tee /etc/cloud/cloud.cfg.d/90_dpkg.cfg
 sudo apt-get purge cloud-init
