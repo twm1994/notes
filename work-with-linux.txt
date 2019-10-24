@@ -13,3 +13,7 @@ gsettings get org.gnome.desktop.app-folders folder-children
 
 # zip all file in current directory
 zip -r myfiles.zip .
+
+# zip all contents without including the root folder
+cd rootfolder
+zip -r ../package.zip .
