@@ -1,0 +1,52 @@
+ {
+  "auto_complete_triggers":
+  [
+    {
+      "characters": "<",
+      "selector": "text.html"
+    },
+    {
+      "characters": "\\",
+      "selector": "text.tex.latex"
+    }
+  ],
+  "close_windows_when_empty": false,
+  "color_scheme": "Packages/Theme - Spacegray/base16-ocean.dark.tmTheme",
+  "ensure_newline_at_eof_on_save": false,
+  "font_size": 10,
+  "hot_exit": true,
+  "ignored_packages":
+  [
+    "ActionScript",
+    "AppleScript",
+    "ASP",
+    "Batch File",
+    "Clojure",
+    "D",
+    "Erlang",
+    "Go",
+    "Graphviz",
+    "Groovy",
+    "Haskell",
+    "Lisp",
+    "Matlab",
+    "Objective-C",
+    "OCaml",
+    "Pascal",
+    "Perl",
+    "Rails",
+    "RestructuredText",
+    "Ruby",
+    "Rust",
+    "Scala",
+    "TCL",
+    "YAML"
+  ],
+  "line_padding_bottom": 3,
+  "line_padding_top": 3,
+  "tab_size": 2,
+  "theme": "Spacegray Oceanic.sublime-theme",
+  "translate_tabs_to_spaces": true,
+  "trim_trailing_white_space_on_save": true
+}
+
