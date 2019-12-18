@@ -23,3 +23,7 @@ sudo snap install node --classic --channel={version}
 
 # install maven
 sudo apt install maven
+
+# config mysql
+# setup root user
+sudo mysql_secure_installation
