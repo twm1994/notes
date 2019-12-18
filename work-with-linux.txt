@@ -17,3 +17,9 @@ zip -r myfiles.zip .
 # zip all contents without including the root folder
 cd rootfolder
 zip -r ../package.zip .
+
+# install Node.js
+sudo snap install node --classic --channel={version}
+
+# install maven
+sudo apt install maven
