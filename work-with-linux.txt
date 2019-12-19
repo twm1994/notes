@@ -25,5 +25,25 @@ sudo snap install node --classic --channel={version}
 sudo apt install maven
 
 # config mysql
-# setup root user
+## setup root user
 sudo mysql_secure_installation
+## move data dir
+mkdir mysql-data
+chown -R  mysql:mysql mysql-data
+sudo service mysql stop
+## check current data dir, default is /var/lib/mysql
+sudo mysql -u root -p -e "select @@datadir;"
+## move all data and perserve permissions and timestamps
+sudo rsync -av /var/lib/mysql mysql-data
+sudo cp -R -p /var/lib/mysql/. mysql-data
+## rename original dir to avoid confusion
+sudo mv /var/lib/mysql /var/lib/mysql.bak
+## change datadir in the following config file
+sudo vim /etc/mysql/mysql.conf.d/mysqld.cnf
+## configure apparmor
+sudo vim /etc/apparmor.d/tunables/alias
+## uncomment the alias line and changedatadir
+alias /var/lib/mysql -> {datadir}
+sudo systemctl restart apparmor
+## add dir to pass environment check
+sudo mkdir /var/lib/mysql/mysql -p
