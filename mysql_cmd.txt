@@ -56,10 +56,9 @@ sudo mkdir /var/lib/mysql/mysql -p
 sudo mysql -u root -p
 ### mysql query ###
 drop user 'root'@'localhost';
-create user 'root'@'%' identified by 'password';
 create user 'root'@'localhost' identified with mysql_native_password by 'password';
-grant all previleges on *.* to 'root'@'%' with grant option;
-flush previleges;
+grant all privileges on *.* to 'root'@'%' with grant option;
+flush privileges;
 ### end mysql query ###
 ## check password
 sudo cat /etc/mysql/debian.cnf
