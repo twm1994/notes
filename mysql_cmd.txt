@@ -26,3 +26,42 @@ bin\mysqladmin -u root -p shutdown
 
 # jdbc connection parameters
 jdbc:mysql://localhost/dbname?useLegacyDatetimeCode=false&serverTimezone=Asia/Hong_Kong
+
+# config mysql on linux
+## setup root user
+sudo mysql_secure_installation
+## move data dir
+mkdir mysql-data
+chown -R  mysql:mysql mysql-data
+sudo service mysql stop
+## check current data dir, default is /var/lib/mysql
+sudo mysql -u root -p -e "select @@datadir;"
+## move all data and perserve permissions and timestamps
+## will move all files to {datadir}/mysql
+sudo rsync -av /var/lib/mysql {datadir}
+## rename original dir to avoid confusion
+sudo mv /var/lib/mysql /var/lib/mysql.bak
+## change datadir in the following config file
+sudo vim /etc/mysql/mysql.conf.d/mysqld.cnf
+## configure apparmor
+sudo vim /etc/apparmor.d/tunables/alias
+## uncomment the alias line and changedatadir
+alias /var/lib/mysql -> {datadir}/mysql
+sudo systemctl restart apparmor
+## add dir to pass environment check
+sudo mkdir /var/lib/mysql/mysql -p
+## restart mysql and check status
+
+## remove sudo login
+sudo mysql -u root -p
+### mysql query ###
+drop user 'root'@'localhost';
+create user 'root'@'%' identified by 'password';
+create user 'root'@'localhost' identified with mysql_native_password by 'password';
+grant all previleges on *.* to 'root'@'%' with grant option;
+flush previleges;
+### end mysql query ###
+## check password
+sudo cat /etc/mysql/debian.cnf
+## check user
+select user,host,plugin from mysql.user;
