@@ -28,6 +28,8 @@ bin\mysqladmin -u root -p shutdown
 jdbc:mysql://localhost/dbname?useLegacyDatetimeCode=false&serverTimezone=Asia/Hong_Kong
 
 # config mysql on linux
+## disable starting on boot
+sudo systemctl disable mysql
 ## setup root user
 sudo mysql_secure_installation
 ## move data dir
