@@ -26,6 +26,8 @@ sudo vim /etc/fstab
 # add following line (separated by tabs)
 Ubuntu_Server  /home/twm/shared vboxsf  defaults  0 0
 # :wq to save and quit
+# permission
+sudo usermod -aG vboxsf twm
 sudo vim /etc/modules
 # add following line
 vboxsf
