@@ -8,8 +8,16 @@ if [ -n "$BASH_VERSION" ]; then
     fi
 fi
 
+
 #---------Autostart X at Login----------
 # add to $HOME/.bash_profile
 if systemctl -q is-active graphical.target && [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
   exec startx
 fi
+
+
+#---------i3wm Config----------
+# Display
+exec_always --no-startup-id xrandr --output Virtual-l --mode 1920*1080
+# Wallpaper
+exec_always --no-startup-id feh --bg-fill <path to wallpaper>
