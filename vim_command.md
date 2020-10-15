@@ -1,3 +1,4 @@
+```vim
 :q!
 :help
 
@@ -77,3 +78,4 @@ Ctrl i // go forward
 // copy paste
 y
 p
+```
