@@ -1,3 +1,11 @@
+## normal mode
+
+|command|description|
+|-----|-----|
+|`:tabedit <file>`|open a tab for `<file>`|
+|`[i]gt`|go to `[i]`th tab|
+|``:e `=<command>` ``|edit the output of `<command>`|
+
 ```vim
 :q!
 :help
