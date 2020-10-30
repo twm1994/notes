@@ -5,7 +5,10 @@
 |`:tabedit <file>`|open a tab for `<file>`|
 |`[i]gt`|go to `[i]`th tab|
 |``:e `=<command>` ``|edit the output of `<command>`|
+|`:e #[n]` \| `CTRL-^`|Edit the alternate file (mostly the previously edited file)|
 
+
+## vim tutor?
 ```vim
 :q!
 :help
