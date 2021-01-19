@@ -1,6 +1,9 @@
 ### hyperref, use latex command
 `\texorpdfstring{}{}`
 
+when using the elsarticle template with \corref{}
+`\hypersetup{pdfauthor=author}`
+
 ### overful/underful \hbox
 ```latex
 \usepackage{microtype}
