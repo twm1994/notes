@@ -18,7 +18,15 @@
 ```sh
 cd rootfolder
 zip -r ../package.zip .
-~~~
+```
+### add a file to a archive
+`zip -u <archivename>.zip <filename>`
+
+### unzip view files
+`unzip -l <archivename>.zip`
+
+### unzip archive or files in the archive
+`unzip <archivename>.zip [file1|file2|...] [-d <directory>]
 
 ### install Node.js
 `sudo snap install node --classic --channel={version}`
