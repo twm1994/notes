@@ -2,6 +2,8 @@
 
 [docker as non-root user](https://docs.docker.com/engine/install/linux-postinstall/)
 
+[guide](https://towardsdatascience.com/making-docker-and-conda-play-well-together-eda0ff995e3c)
+
 sudo usermod -aG docker $USER
 
 docker run -i -t -p 8888:8888 continuumio/conda-ci-linux-64-python3.8 /bin/bash -c "/opt/conda/bin/conda install jupyter -y --quiet && mkdir /opt/notebooks && /opt/conda/bin/jupyter notebook --notebook-dir=/opt/notebooks --ip='*' --port=8888 --no-browser"
