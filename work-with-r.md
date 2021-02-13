@@ -1,0 +1,2 @@
+- [Non-standard evaluation](https://cran.r-project.org/web/packages/lazyeval/vignettes/lazyeval.html)
+- [data processing tutorial](https://r4ds.had.co.nz/pipes.html)
