@@ -1,2 +1,3 @@
 - [Non-standard evaluation](https://cran.r-project.org/web/packages/lazyeval/vignettes/lazyeval.html)
 - [data processing tutorial](https://r4ds.had.co.nz/pipes.html)
+- [replace values while NAs are in dataframe](https://stackoverflow.com/questions/23396279/when-trying-to-replace-values-missing-values-are-not-allowed-in-subscripted-as#23396731), `is.na()` to filter NAs
