@@ -1,6 +1,6 @@
 launch command
 
-`docker run --name kali_linux --net="host" --privileged -e DISPLAY=$DISPLAY -it -v /tmp/.X11-unix:/tmp/.X11-unix kalilinux/kali-linux-docker /bin/bash`
+`docker run --name kali_linux --net="host" --privileged -e DISPLAY=$DISPLAY -it -v /tmp/.X11-unix:/tmp/.X11-unix kalilinux/kali-rolling /bin/bash`
 
 meta packages
 
