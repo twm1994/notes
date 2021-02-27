@@ -65,3 +65,24 @@ locate
 which
 find DIR -name DIRORFILE
 ```
+
+[special characters]https://www.howtogeek.com/439199/15-special-characters-you-need-to-know-for-bash/(https://www.howtogeek.com/439199/15-special-characters-you-need-to-know-for-bash/)
+```sh
+/
+.
+..
+~
+#
+?
+*
+;
+[]
+&
+$
+~
+!
+!!
+<
+|
+
+```
