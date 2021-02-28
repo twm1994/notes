@@ -10,6 +10,11 @@ persistent storage
 
 `docker run -ti --rm --mount src=kali-root,dst=/root --mount src=kali-postgres,dst=/var/lib/postgresql my-kali`
 
+```sh
+apt update
+apt install kali-linux-default kali-tools-top10 
+```
+
 ## Reference
 1 https://hackingprofessional.github.io/Security/Using-Kali-Linux-as-a-Docker-container
 
