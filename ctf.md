@@ -1,6 +1,7 @@
 common shell tools
 
 ```sh
+dnsenum
 strings
 binwalk
 gdb
@@ -12,6 +13,8 @@ nc
 file
 awk
 zipinfo
+john
+objdump
 ```
 
 examples
