@@ -15,6 +15,7 @@ awk
 zipinfo
 john
 objdump
+hexdump
 ```
 
 examples
