@@ -32,6 +32,22 @@ MAX()
 ### load records to table
 `LOAD DATA LOCAL INFILE 'filename' INTO TABLE tablename;`
 
+```sql
+LOAD DATA INFILE '/home/export_file.csv'
+INTO TABLE table_name
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '/n'
+-- '\r\n' on Windows?
+IGNORE 1 ROWS;
+```
+
+### find data directory
+`mysql> select @@datadir;`
+
+### rename
+`ALTER TABLE old_table_name RENAME new_table_name;`
+
 ### get database and table information
 ```sql
 SELECT DATABASE();
