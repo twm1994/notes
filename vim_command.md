@@ -7,6 +7,7 @@
 |``:e `=<command>` ``|edit the output of `<command>`|
 |`:e #[n]` \| `CTRL-^`|Edit the alternate file (mostly the previously edited file)|
 
+## use tags (requires tag generators, such as ctags)
 
 ## vim tutor?
 ```vim
