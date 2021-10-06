@@ -15,3 +15,5 @@ when using the elsarticle template with \corref{}
 
 ### minimum margins
 `\usepackage{fullpage}`
+
+### multiline formula, align by `=`, use the `align` environment
